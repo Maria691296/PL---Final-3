@@ -69,9 +69,9 @@ r_exprSeq:    exprSeq                           { ; }
 expression1:  expression                        { ; }  // Lisp can evaluate arithmetical (and similar) expressions in REPL mode
                                                        // REPL Mode should print out the evaluated expressions ==> Future TODO for the Forth translation
 
-            | '(' SETQ IDENTIF number ')'       { /* */ }  // This is the declaration of a variable which in Forth has to be of global scope
+            | '(' SETQ IDENTIF number ')'       { printf("variable %s %s !", $3.code, $3.code) }  // This is the declaration of a variable which in Forth has to be of global scope
                                                                                                       
-            | '(' SETF /* */ ')'                { /* */ }    // Using a variable as receiver requires adding the store operator (!) in Forth 
+            | '(' SETF IDENTIF expression ')'   { printf("%d %s !", $4.value, $3.code) }    // Using a variable as receiver requires adding the store operator (!) in Forth 
 
             | '(' PRINT STRING ')'              { /* */ }
 
@@ -105,9 +105,27 @@ ifHead:       IF expression                     { printf (" IF ") ; }        // 
 
 expression:   operand                                   { ; }                // Common expressions combine arithmetic, relational and boolean expressions, including base operands.
 
-            | '(' '-' expression expression ')'         { printf (" - ") ; }      // binary minus operator 
+            | '(' '+' expression expression ')'         { printf (" + ") ; }
 
-/* - * / MOD AND OR > < GE LE ... NOT */
+            | '(' '*' expression expression ')'         { printf (" * ") ; }
+
+            | '(' '/' expression expression ')'         { printf (" / ") ; }
+
+            | '(' MOD expression expression ')'         { printf (" mod ") ; }
+
+            | '(' '<' expression expression ')'         { printf (" < ") ; }
+
+            | '(' '>' expression expression ')'         { printf (" > ") ; }
+
+            | '(' '<=' expression expression ')'        { printf (" <= ") ; }
+
+            | '(' '>=' expression expression ')'        { printf (" >= ") ; }
+
+            | '(' '=' expression expression ')'         { printf (" = ") ; }
+
+            | '(' '/=' expression expression ')'        { printf (" = 0= ") ; }
+
+            | '(' '-' expression expression ')'         { printf (" - ") ; }      // binary minus operator
 
             | '(' '-' expression ')'                    { printf (" negate ") ; } // Unary minus operator in Lisp
             ;
