@@ -69,7 +69,7 @@ r_exprSeq:    exprSeq                           { ; }
 expression1:  expression                        { ; }  // Lisp can evaluate arithmetical (and similar) expressions in REPL mode
                                                        // REPL Mode should print out the evaluated expressions ==> Future TODO for the Forth translation
 
-            | '(' SETQ IDENTIF number ')'       { /* */ }  // This is the declaration of a variable which in Forth has to be of global scope
+            | '(' SETQ IDENTIF number ')'       { printf ("variable %s %s ! ", $3.code, $3.code) ; }  // This is the declaration of a variable which in Forth has to be of global scope
                                                                                                       
             | '(' SETF /* */ ')'                { /* */ }    // Using a variable as receiver requires adding the store operator (!) in Forth 
 
@@ -118,7 +118,7 @@ operand:      IDENTIF                            { printf (" %s @ ", $1.code) ; 
             ;
 
 
-number:       NUMBER                             { printf (" %d ", $1.value) ; }  // number is an auxiliary Non Terminal to be used in the setq initialization
+number:       NUMBER                             { printf ("%d ", $1.value) ; }  // number is an auxiliary Non Terminal to be used in the setq initialization
             ;
 
 
@@ -202,6 +202,7 @@ t_keyword keywords [] = {     // define the keywords
     "and",         AND,
     "if",          IF,
     "progn",       PROGN,
+    "setq",        SETQ,
     NULL,          0          // 0 to mark the end of the table
 } ;
 
