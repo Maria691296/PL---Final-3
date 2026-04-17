@@ -1,21 +1,32 @@
 #include <stdio.h>
 
-int a ;
-int b ;
+#define INC(x) x=x+1
+#define DEC(x) x=x-1
 
-main () 
+// Tail recursive Fibonacci, es mas eficiente 
+// con varios retornos
+
+
+fibonacci (int a, int b, int n) 
 {
-	a = 10 ;
-	
-	while (a > 0) {
-		printf ("%d", a) ;
-		if (a % 2 == 0) { 
-			puts (" es par ") ;
-		} else {
-			puts (" es impar ") ;
-		}
-		a = a - 1 ;
-	} 
+	if (n < 2) {
+		return b ;
+	}
+
+	return fibonacci (b, a+b , n-1) ;
+}
+
+main ()
+{
+	int resultado;
+	int i ;
+
+    puts ("Sucesion de Fibonacci") ;
+    for (i = 0 ; i < 47 ; INC(i)) {
+		resultado = fibonacci (0, 1, i) ;
+        printf ("%d %s %d", i, " ", resultado) ;
+		puts (" ") ;
+    }
 }
 
 //@ (main)

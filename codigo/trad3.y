@@ -244,7 +244,7 @@ lista_elems:
 elem:
     expresion   { $$.code = $1.code; }
 
-    | STRING    { $$.code = $1.code; }
+    | STRING    { sprintf(temp, "\"%s\"", $1.code); $$.code = gen_code(temp); }
 ;
 
 // === ESTRUCTURAS DE CONTROL ===

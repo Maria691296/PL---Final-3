@@ -77,7 +77,7 @@ expression1:  expression                        { ; }  // Lisp can evaluate arit
 
             | '(' PRINT STRING ')'              { printf (" .\" %s\"", $3.code) ; }
 
-            | '(' PRINC IDENTIF ')'               { printf (" %s @ . ", $3.code) ; }    // Princ should be able to print both expreesions and strings
+            | '(' PRINC element ')'               { ; }    // Princ should be able to print both expreesions and strings
            
             | '(' PROGN exprSeq ')'             { /* */ }
 
@@ -104,9 +104,15 @@ expression1:  expression                        { ; }  // Lisp can evaluate arit
 ifHead:       IF expression                     { printf (" IF ") ; }        // Real Lisp restricts if conditions to Boolean type expressions (excluding base operands?) ==> Future TOOD
             ;
 
+element:      STRING                              { printf (" .\" %s\"", $1.code) ; }
+            | expression                          { printf (" . ") ; }
+            ;
+
 
 expression:   operand                                   { ; }                // Common expressions combine arithmetic, relational and boolean expressions, including base operands.
 
+            | '(' '+' expression expression ')'         { printf (" + ") ; }            
+                
             | '(' '-' expression expression ')'         { printf (" - ") ; }      // binary minus operator 
 
             | '(' '*' expression expression ')'         { printf (" * ") ; }
