@@ -1,1 +1,1 @@
- 1  variable a a ! : main  ." adioooos";  main
+ 100  variable a a ! : main  a @ .  a @ . ;  main

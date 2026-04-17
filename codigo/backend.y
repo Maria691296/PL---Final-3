@@ -75,7 +75,7 @@ expression1:  expression                        { ; }  // Lisp can evaluate arit
 
             | '(' PRINT STRING ')'              { printf (" .\" %s\"", $3.code) ; }
 
-            | '(' PRINC /* */ ')'               { /* */ }    // Princ should be able to print both expreesions and strings
+            | '(' PRINC IDENTIF ')'               { printf (" %s @ . ", $3.code) ; }    // Princ should be able to print both expreesions and strings
            
             | '(' PROGN exprSeq ')'             { /* */ }
 

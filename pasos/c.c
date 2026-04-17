@@ -1,5 +1,5 @@
-int a = 1;
+int a = 100;
 
 main () {
-    puts("adioooos");
+    printf("adioooos", a, a);
 }

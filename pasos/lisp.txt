@@ -1,7 +1,7 @@
 
-(setq a 1)
+(setq a 100)
 
 (defun main ()
- (print "adioooos")
+ (princ a) (princ a)
 )
 (main)
