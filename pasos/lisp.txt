@@ -1,7 +1,10 @@
 
-(setq a 100)
+(setq a 101)
+(setq b 99)
 
 (defun main ()
- (princ a) (princ a)
+ (princ b)
+ (setf b a)
+ (princ b)
 )
 (main)

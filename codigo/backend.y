@@ -71,7 +71,7 @@ expression1:  expression                        { ; }  // Lisp can evaluate arit
 
             | '(' SETQ IDENTIF number ')'       { printf (" variable %s %s ! ", $3.code, $3.code) ; }  // This is the declaration of a variable which in Forth has to be of global scope
                                                                                                       
-            | '(' SETF IDENTIF expression ')'                { /* */ }    // Using a variable as receiver requires adding the store operator (!) in Forth 
+            | '(' SETF IDENTIF expression ')'   { printf (" %s ! ", $3.code) ; }    // Using a variable as receiver requires adding the store operator (!) in Forth 
 
             | '(' PRINT STRING ')'              { printf (" .\" %s\"", $3.code) ; }
 
@@ -203,6 +203,7 @@ t_keyword keywords [] = {     // define the keywords
     "if",          IF,
     "progn",       PROGN,
     "setq",        SETQ,
+    "setf",        SETF,
     NULL,          0          // 0 to mark the end of the table
 } ;
 

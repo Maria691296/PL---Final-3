@@ -1,1 +1,1 @@
- 100  variable a a ! : main  a @ .  a @ . ;  main
+ 101  variable a a !  99  variable b b ! : main  b @ .  a @  b !  b @ . ;  main

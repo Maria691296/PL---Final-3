@@ -1,5 +1,8 @@
-int a = 100;
+int a = 101;
+int b = 99;
 
 main () {
-    printf("adioooos", a, a);
+    printf("hola", b);
+    b = a;
+    printf("hola", b);
 }
