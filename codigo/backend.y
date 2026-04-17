@@ -69,9 +69,9 @@ r_exprSeq:    exprSeq                           { ; }
 expression1:  expression                        { ; }  // Lisp can evaluate arithmetical (and similar) expressions in REPL mode
                                                        // REPL Mode should print out the evaluated expressions ==> Future TODO for the Forth translation
 
-            | '(' SETQ IDENTIF number ')'       { printf ("variable %s %s ! ", $3.code, $3.code) ; }  // This is the declaration of a variable which in Forth has to be of global scope
+            | '(' SETQ IDENTIF number ')'       { printf (" variable %s %s ! ", $3.code, $3.code) ; }  // This is the declaration of a variable which in Forth has to be of global scope
                                                                                                       
-            | '(' SETF /* */ ')'                { /* */ }    // Using a variable as receiver requires adding the store operator (!) in Forth 
+            | '(' SETF IDENTIF expression ')'                { /* */ }    // Using a variable as receiver requires adding the store operator (!) in Forth 
 
             | '(' PRINT STRING ')'              { /* */ }
 
@@ -81,8 +81,8 @@ expression1:  expression                        { ; }  // Lisp can evaluate arit
 
             | '(' MAIN ')'                      { printf (" main\n") ; } // call to the main function 
 
-            | '(' DEFUN MAIN                    { /* */ } 
-                '(' ')' exprSeq ')'             {  /* */ }
+            | '(' DEFUN MAIN                    { printf (": main ") ; } 
+                '(' ')' exprSeq ')'             { printf ("; ") ; }
 
 // In real Lisp some expressions like if or Loop-While-Do are only permitted inside defun definitions (level 2 expressions) ==> Future ToDo
 // Level 1 and common expressions (arithmetic etc.) are also permitted inside a defun definition
@@ -118,7 +118,7 @@ operand:      IDENTIF                            { printf (" %s @ ", $1.code) ; 
             ;
 
 
-number:       NUMBER                             { printf ("%d ", $1.value) ; }  // number is an auxiliary Non Terminal to be used in the setq initialization
+number:       NUMBER                             { printf (" %d ", $1.value) ; }  // number is an auxiliary Non Terminal to be used in the setq initialization
             ;
 
 
