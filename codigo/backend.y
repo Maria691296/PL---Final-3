@@ -73,7 +73,7 @@ expression1:  expression                        { ; }  // Lisp can evaluate arit
                                                                                                       
             | '(' SETF IDENTIF expression ')'                { /* */ }    // Using a variable as receiver requires adding the store operator (!) in Forth 
 
-            | '(' PRINT STRING ')'              { /* */ }
+            | '(' PRINT STRING ')'              { printf (" .\" %s\"", $3.code) ; }
 
             | '(' PRINC /* */ ')'               { /* */ }    // Princ should be able to print both expreesions and strings
            

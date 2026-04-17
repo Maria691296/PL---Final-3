@@ -2,6 +2,6 @@
 (setq a 1)
 
 (defun main ()
- (setq main_b 1)
+ (print "adioooos")
 )
 (main)
